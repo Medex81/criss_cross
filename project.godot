@@ -16,12 +16,22 @@ _global_script_class_icons={
 [application]
 
 config/name="criss_cross"
-run/main_scene="res://ColorRect.tscn"
+run/main_scene="res://StartScene.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://Global.gd"
+game_logic="*res://game_logic.gd"
+
+[display]
+
+window/size/width=600
+window/size/height=800
+
+[editor_plugins]
+
+enabled=PoolStringArray(  )
 
 [rendering]
 

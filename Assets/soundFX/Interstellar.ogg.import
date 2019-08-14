@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Interstellar.ogg-9e701f8a43c3d12eb99539906d659329.oggstr"
+
+[deps]
+
+source_file="res://Assets/soundFX/Interstellar.ogg"
+dest_files=[ "res://.import/Interstellar.ogg-9e701f8a43c3d12eb99539906d659329.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

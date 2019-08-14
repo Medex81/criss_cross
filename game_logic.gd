@@ -106,11 +106,14 @@ func _processMatch(aIdxArray):
 			# Победитель
 			command.player = aModel[m.front()]
 			# Отправляем команду подписавшимся объектам на обработку
-			emit_signal("changState", command)
+			Global.sendCommand(command, self)
 			print("final> ", aModel[m.front()])
 # Запускаем игру, инициализируем игровые объекты
 func runGame():
 	#print("func _init()")
+	var command = Global.createCommandReady()
+	# Отправляем команду подписавшимся объектам на обработку
+	Global.sendCommand(command, self)
 	# Инициализация матрицы
 	aModel.clear()
 	aEmptyCells.clear()
@@ -145,8 +148,7 @@ func _processNextStep(nId:int):
 		# Победитель
 		command.player = eStepForPlayer
 		# Отправляем команду подписавшимся объектам на обработку
-		emit_signal("changState", command)
-		
+		Global.sendCommand(command, self)
 		print("set step player> ", eStepForPlayer, " id>", nId)
 		# Проверяем условие для игрового события обусловленного правилами.
 		# Проверка установки "3 в ряд"
@@ -170,7 +172,7 @@ func _processNextStep(nId:int):
 				# Победитель
 				commandLose.player = Global.EPlayers.NONE
 				# Отправляем команду подписавшимся объектам на обработку
-				emit_signal("changState", commandLose)
+				Global.sendCommand(commandLose, self)
 				eStepForPlayer = Global.EPlayers.NONE
 				print("final none")
 				return
