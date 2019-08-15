@@ -7,6 +7,7 @@ extends Control
 
 # Числовой идетнификатор объекта.
 var id = 0
+var bForceFrame = false
 
 # Идентификаторы состояний объекта
 enum { NONE, CRIST, ZERO}
@@ -43,5 +44,16 @@ func getState():
 func _gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		emit_signal( "clicked", id )
+		$AnimationPlayer.play("cell_click")
 
+func _on_Control_mouse_entered():
+	if !bForceFrame:
+		$NinePatchRectSel.visible = true
 
+func _on_Control_mouse_exited():
+	if !bForceFrame:
+		$NinePatchRectSel.visible = false
+	
+func setForceFrame(frameState):
+	bForceFrame = frameState
+	$NinePatchRectSel.visible = bForceFrame

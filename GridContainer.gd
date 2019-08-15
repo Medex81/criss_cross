@@ -31,6 +31,10 @@ func procc_command(command, sender):
 			Global.ECMDType.READY:
 				for i in columns * columns:
 					get_child(i).setState(Global.EPlayers.NONE)
+					get_child(i).setForceFrame(false)
+			Global.ECMDType.FINAL:
+				for id in command.arr_idx:
+					get_child(id).setForceFrame(true)
 					
 # Обработчик событий дочерних объектов (клик по объекту)
 func on_controlClicked(nId):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Cell.gd" type="Script" id=1]
 [ext_resource path="res://Assets/blue_round_rect.png" type="Texture" id=2]
+[ext_resource path="res://Assets/white_round_rect.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Assets/17321.ttf"
@@ -9,6 +10,25 @@ font_path = "res://Assets/17321.ttf"
 [sub_resource type="DynamicFont" id=2]
 size = 44
 font_data = SubResource( 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "cell_click"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("NinePatchRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.7, 0.7 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "cell_win"
 
 [node name="Control" type="Control"]
 anchor_right = 0.068
@@ -22,8 +42,23 @@ script = ExtResource( 1 )
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 2.0
+margin_bottom = 2.0
 rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 34.55, 34.27 )
 texture = ExtResource( 2 )
+
+[node name="NinePatchRectSel" type="NinePatchRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 2.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 34.55, 34.27 )
+texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0
@@ -38,3 +73,9 @@ custom_fonts/font = SubResource( 2 )
 align = 1
 valign = 1
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/cell_click = SubResource( 3 )
+anims/cell_win = SubResource( 4 )
+
+[connection signal="mouse_entered" from="." to="." method="_on_Control_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Control_mouse_exited"]
